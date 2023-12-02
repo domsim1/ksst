@@ -28,7 +28,9 @@ func main() {
 		strData = encoder.EncodeData(data)
 	case "decode":
 		fmt.Println("decoding data")
-		strData = encoder.DecodeData(data)
+		sd, err := encoder.DecodeData(data)
+		util.Check(err)
+		strData = sd
 	default:
 		exitWithUsage()
 	}

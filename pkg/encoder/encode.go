@@ -2,14 +2,14 @@ package encoder
 
 import (
 	"encoding/base64"
-
-	"github.com/domsim1/ksst/pkg/util"
 )
 
-func DecodeData(data []byte) string {
+func DecodeData(data []byte) (string, error) {
 	dat, err := base64.StdEncoding.DecodeString(string(data))
-	util.Check(err)
-	return string(dat)
+	if err != nil {
+		return "", err
+	}
+	return string(dat), nil
 }
 
 func EncodeData(data []byte) string {
