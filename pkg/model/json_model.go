@@ -10,6 +10,26 @@ func (sf SaveFloat) MarshalJSON() ([]byte, error) {
 	return []byte(fmt.Sprintf("%.6f", float64(sf))), nil
 }
 
+type SaveBool bool
+
+func (sb SaveBool) MarshalJSON() ([]byte, error) {
+	if sb {
+		return []byte("true"), nil
+	}
+	return []byte("0.000000"), nil
+}
+
+func (sb *SaveBool) UnmarshalJSON(data []byte) error {
+	v := string(data)
+	switch v {
+	case "true":
+		*sb = SaveBool(true)
+	default:
+		*sb = SaveBool(false)
+	}
+	return nil
+}
+
 type SaveData struct {
 	PIv45                SaveFloat `json:"p_iv4_5"`
 	MicroLevel8          SaveFloat `json:"micro_level8"`
@@ -250,7 +270,7 @@ type SaveData struct {
 	MicroWins115         SaveFloat `json:"micro_wins115"`
 	MicroPlayed122       SaveFloat `json:"micro_played122"`
 	MicroLevel137        SaveFloat `json:"micro_level137"`
-	Talkoo0X7AEr         SaveFloat `json:"talkoo<0x7A>er"`
+	Talkoozer            SaveFloat `json:"talkoozer"`
 	Flush12              SaveFloat `json:"flush12"`
 	Stayhere             SaveFloat `json:"stayhere"`
 	Encounter139         SaveFloat `json:"encounter_13_9"`
@@ -635,7 +655,7 @@ type SaveData struct {
 	MicroLevel23         SaveFloat `json:"micro_level23"`
 	MicroWins30          SaveFloat `json:"micro_wins30"`
 	Bincheck38           SaveFloat `json:"bincheck38"`
-	FuturesPu0X7A0X7ALe2 SaveFloat `json:"futures_pu<0x7A><0x7A>le2"`
+	FuturesPuzzle2       SaveFloat `json:"futures_puzzle2"`
 	ItemPinkcard         SaveFloat `json:"item_pinkcard"`
 	Encounter62          SaveFloat `json:"encounter_6_2"`
 	Encounter814         SaveFloat `json:"encounter_8_14"`
@@ -889,7 +909,7 @@ type SaveData struct {
 	Encounter253         SaveFloat `json:"encounter_25_3"`
 	ItemFound93          SaveFloat `json:"item_found93"`
 	Storage92            SaveFloat `json:"storage92"`
-	StoreSi0X7AE         SaveFloat `json:"store_si<0x7A>e"`
+	StoreSize            SaveFloat `json:"store_size"`
 	PIv63                SaveFloat `json:"p_iv6_3"`
 	PIq12                SaveFloat `json:"p_iq12"`
 	IRight12             SaveFloat `json:"i_right12"`
@@ -1093,7 +1113,7 @@ type SaveData struct {
 	PIv65                SaveFloat `json:"p_iv6_5"`
 	MicroLevel21         SaveFloat `json:"micro_level21"`
 	MicroWins32          SaveFloat `json:"micro_wins32"`
-	FuturesPu0X7A0X7ALe0 SaveFloat `json:"futures_pu<0x7A><0x7A>le0"`
+	FuturesPuzzle0       SaveFloat `json:"futures_puzzle0"`
 	Encounter60          SaveFloat `json:"encounter_6_0"`
 	Encounter300         SaveFloat `json:"encounter_30_0"`
 	ItemFound70          SaveFloat `json:"item_found70"`
@@ -1111,7 +1131,7 @@ type SaveData struct {
 	Encounter255         SaveFloat `json:"encounter_25_5"`
 	ItemFound95          SaveFloat `json:"item_found95"`
 	Day                  SaveFloat `json:"day"`
-	Screensi0X7AE        SaveFloat `json:"screensi<0x7A>e"`
+	ScreenSize           SaveFloat `json:"screensize"`
 	Storage0             SaveFloat `json:"storage0"`
 	PAdd72               SaveFloat `json:"p_add7_2"`
 	PBonus135            SaveFloat `json:"p_bonus13_5"`
@@ -1139,7 +1159,7 @@ type SaveData struct {
 	MicroWins93          SaveFloat `json:"micro_wins93"`
 	MicroWins109         SaveFloat `json:"micro_wins109"`
 	TheaBond8            SaveFloat `json:"thea_bond_8"`
-	Meet0X7AOla          SaveFloat `json:"meet_<0x7A>ola"`
+	MeetZola             SaveFloat `json:"meet_zola"`
 	Beatgame             SaveFloat `json:"beatgame"`
 	ShipIssue2           SaveFloat `json:"ship_issue2"`
 	Encounter2312        SaveFloat `json:"encounter_23_12"`
@@ -1639,7 +1659,7 @@ type SaveData struct {
 	MicroWins82          SaveFloat `json:"micro_wins82"`
 	MicroLevel91         SaveFloat `json:"micro_level91"`
 	MicroWins118         SaveFloat `json:"micro_wins118"`
-	ErrorPu0X7A0X7ALe    SaveFloat `json:"error_pu<0x7A><0x7A>le"`
+	ErrorPuzzle          SaveFloat `json:"error_puzzle"`
 	Encounter134         SaveFloat `json:"encounter_13_4"`
 	Encounter1614        SaveFloat `json:"encounter_16_14"`
 	ItemFound188         SaveFloat `json:"item_found188"`
@@ -2041,8 +2061,7 @@ type SaveData struct {
 	MicroWins71          SaveFloat `json:"micro_wins71"`
 	PartyNo0             SaveFloat `json:"party_no0"`
 	FuturesNout          SaveFloat `json:"futures_nout"`
-	// TODO: Handle, sometime float sometimes bool
-	// ResortMark2          SaveFloat `json:"resort_mark2"`
+	ResortMark2          SaveBool  `json:"resort_mark2"`
 	Encounter106         SaveFloat `json:"encounter_10_6"`
 	Encounter193         SaveFloat `json:"encounter_19_3"`
 	ItemFound33          SaveFloat `json:"item_found33"`
@@ -2086,7 +2105,7 @@ type SaveData struct {
 	MicroLevel22         SaveFloat `json:"micro_level22"`
 	MicroWins31          SaveFloat `json:"micro_wins31"`
 	Bincheck39           SaveFloat `json:"bincheck39"`
-	FuturesPu0X7A0X7ALe3 SaveFloat `json:"futures_pu<0x7A><0x7A>le3"`
+	FuturesPuzzle3       SaveFloat `json:"futures_puzzle3"`
 	Encounter63          SaveFloat `json:"encounter_6_3"`
 	Encounter303         SaveFloat `json:"encounter_30_3"`
 	ItemFound73          SaveFloat `json:"item_found73"`
@@ -2455,7 +2474,7 @@ type SaveData struct {
 	PIv64                SaveFloat `json:"p_iv6_4"`
 	MicroLevel20         SaveFloat `json:"micro_level20"`
 	MicroWins33          SaveFloat `json:"micro_wins33"`
-	FuturesPu0X7A0X7ALe1 SaveFloat `json:"futures_pu<0x7A><0x7A>le1"`
+	FuturesPuzzle1       SaveFloat `json:"futures_puzzle1"`
 	Encounter61          SaveFloat `json:"encounter_6_1"`
 	Encounter301         SaveFloat `json:"encounter_30_1"`
 	ItemFound71          SaveFloat `json:"item_found71"`
