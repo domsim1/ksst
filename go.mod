@@ -1,6 +1,6 @@
 module github.com/domsim1/ksst
 
-go 1.21.3
+go 1.18
 
 require fyne.io/fyne/v2 v2.4.2
 
