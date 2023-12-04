@@ -1,6 +1,8 @@
 package view
 
 import (
+	"fmt"
+
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/data/binding"
@@ -20,17 +22,32 @@ func MakePlayerContainer(saveData *model.SaveData) *fyne.Container {
 
 	left := widget.NewForm(
 		widget.NewFormItem("Name", name),
+		widget.NewFormItem("Level", EntrySF(&saveData.PLevel0)),
 		widget.NewFormItem("HP", EntrySF(&saveData.PHp0)),
+		widget.NewFormItem("EP", EntrySF(&saveData.PMana0)),
+		widget.NewFormItem("Attack", EntrySF(&saveData.PAtk0)),
+		widget.NewFormItem("Speed", EntrySF(&saveData.PSpd0)),
+		widget.NewFormItem("Charima", EntrySF(&saveData.PIq0)),
 	)
 	right := widget.NewForm(
 		widget.NewFormItem("Money", money),
+		widget.NewFormItem("Exp", EntrySF(&saveData.PExp0)),
 		widget.NewFormItem("Max HP", EntrySF(&saveData.PMaxhp0)),
+		widget.NewFormItem("Max EP", EntrySF(&saveData.PMaxmana0)),
+		widget.NewFormItem("Defence", EntrySF(&saveData.PDef0)),
+		widget.NewFormItem("Luck", EntrySF(&saveData.PLck0)),
 	)
+
+	pocket := widget.NewForm()
 
 	return container.NewPadded(
 		container.NewVScroll(
 			container.NewVBox(
+				widget.NewLabel(fmt.Sprintf("Title: %s", saveData.PTitle0)),
 				container.NewGridWithColumns(2, left, right),
+				widget.NewSeparator(),
+				widget.NewLabel("Pocket"),
+				pocket,
 			),
 		),
 	)

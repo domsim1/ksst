@@ -64,7 +64,7 @@ func makeMenu() *fyne.MainMenu {
 
 func makeTabs() *container.AppTabs {
 	tabs := container.NewAppTabs(
-		container.NewTabItem("Player", view.MakePlayerContainer(saveData)),
+		container.NewTabItem("New Kid", view.MakePlayerContainer(saveData)),
 	)
 	tabs.SetTabLocation(container.TabLocationTop)
 	return tabs
