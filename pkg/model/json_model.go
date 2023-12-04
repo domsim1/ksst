@@ -45,6 +45,7 @@ type SaveData struct {
 	Encounter40          SaveFloat       `json:"encounter_4_0"`
 	Encounter3010        SaveFloat       `json:"encounter_30_10"`
 	ItemFound164         SaveFloat       `json:"item_found164"`
+	HitBinX              SaveFloat       `json:"hitbin x,omitempty"`
 	PEv45                SaveFloat       `json:"p_ev4_5"`
 	PItem41              SaveFloat       `json:"p_item4_1"`
 	PBonus65             SaveFloat       `json:"p_bonus6_5"`
@@ -1009,6 +1010,7 @@ type SaveData struct {
 	CheckSave1           SaveFloat       `json:"check_save1"`
 	ItemFound55          SaveFloat       `json:"item_found55"`
 	Died2Vance           SaveFloat       `json:"died2vance"`
+	HitBin               SaveFloat       `json:"hitbin,omitempty"`
 	PIv10                SaveFloat       `json:"p_iv1_0"`
 	PIv85                SaveFloat       `json:"p_iv8_5"`
 	MicroWins19          SaveFloat       `json:"micro_wins19"`
@@ -1248,6 +1250,7 @@ type SaveData struct {
 	CheckSave5           SaveFloat       `json:"check_save5"`
 	ItemFound51          SaveFloat       `json:"item_found51"`
 	ItemFound119         SaveFloat       `json:"item_found119"`
+	HitBinSide           SaveFloat       `json:"hitbin side,omitempty"`
 	Storage50            SaveFloat       `json:"storage50"`
 	PExpNext8            SaveFloat       `json:"p_exp_next8"`
 	MicroPlayed4         SaveFloat       `json:"micro_played4"`
@@ -1842,6 +1845,7 @@ type SaveData struct {
 	Encounter43          SaveFloat       `json:"encounter_4_3"`
 	Encounter3013        SaveFloat       `json:"encounter_30_13"`
 	ItemFound167         SaveFloat       `json:"item_found167"`
+	SeenCredits          SaveFloat       `json:"seen credits,omitempty"`
 	PEv46                SaveFloat       `json:"p_ev4_6"`
 	PItem42              SaveFloat       `json:"p_item4_2"`
 	PBonus66             SaveFloat       `json:"p_bonus6_6"`

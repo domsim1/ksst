@@ -29,3 +29,21 @@ func ConvertModelToStringData(data *SaveData, prefix string) (string, error) {
 	}
 	return fmt.Sprintf("%s%s\x00", prefix, strData), nil
 }
+
+// TODO: Support INI format once mature
+/**** INI HEX DATA Scheme ****
+--- Entry ---
+* 8 bytes: not sure..
+* 4 bytes: 1, mark end of value
+* 4 bytes: length of first key
+--- Data ---
+* variable length: key for value, size provide from previous 4 bytes
+* 4 bytes: value flag, if 1 string else 0 float64
+* if string:
+*   4 bytes: size of string
+*   variable length: value
+* else float64:
+*   8 bytes (big-endian): value
+* 4 bytes: 1, mark end of value
+* 4 bytes: length of next key
+*/
