@@ -23,8 +23,8 @@ run:
 	go run ${KSST_PATH}
 
 build-win-release:
-	sudo ~/go/bin/fyne-cross windows -arch=amd64 -app-id=domsim1.ksst -output ksst ./cmd/ksst-gui
+	sudo ~/go/bin/fyne-cross windows -arch=amd64 -app-id=com.domsim1.ksst -output ksst ./cmd/ksst-gui
 
 build-linux-release:
-	sudo ~/go/bin/fyne-cross linux -arch=amd64 -app-id=domsim1.ksst -output ksst ./cmd/ksst-gui
+	sudo ~/go/bin/fyne-cross linux -arch=amd64 -app-id=com.domsim1.ksst -output ksst ./cmd/ksst-gui
 
