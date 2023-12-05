@@ -22,10 +22,6 @@ run:
 	go mod tidy
 	go run ${KSST_PATH}
 
-run-encoder:
-	go mod tidy
-	go run ${KSST_ENCODER_PATH}
-
 build-win-release:
 	sudo ~/go/bin/fyne-cross windows -arch=amd64 -app-id=domsim1.ksst -output ksst ./cmd/ksst-gui
 

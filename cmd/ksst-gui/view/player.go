@@ -38,9 +38,18 @@ func MakePlayerContainer(saveData *model.SaveData) *fyne.Container {
 		widget.NewFormItem("Luck", EntrySF(&saveData.PLck0)),
 	)
 
-	pocket := widget.NewForm(
-		widget.NewFormItem("#1", EntrySF(&saveData.PItem00)),
-	)
+	pocket := container.NewGridWithColumns(2, makeItemSelect(
+		&saveData.PItem00,
+		&saveData.PItem01,
+		&saveData.PItem02,
+		&saveData.PItem03,
+		&saveData.PItem04,
+		&saveData.PItem05,
+		&saveData.PItem06,
+		&saveData.PItem07,
+	)...)
+
+	bonds := makeBondsAccordion(saveData)
 
 	return container.NewPadded(
 		container.NewVScroll(
@@ -50,70 +59,105 @@ func MakePlayerContainer(saveData *model.SaveData) *fyne.Container {
 				widget.NewSeparator(),
 				widget.NewLabel("Pocket"),
 				pocket,
+				widget.NewSeparator(),
+				widget.NewLabel("Bonds"),
+				bonds,
 			),
 		),
 	)
 }
 
-//				widget.NewAccordion(
-//					widget.NewAccordionItem(
-//						fmt.Sprintf("Echo Bond: %.0f", saveData.BondEcho),
-//						container.NewVBox(
-//							widget.NewLabel(fmt.Sprintf("Bond0: %.f", saveData.EchoBond0)),
-//							widget.NewLabel(fmt.Sprintf("Bond1: %.f", saveData.EchoBond1)),
-//							widget.NewLabel(fmt.Sprintf("Bond2: %.f", saveData.EchoBond2)),
-//							widget.NewLabel(fmt.Sprintf("Bond3: %.f", saveData.EchoBond3)),
-//							widget.NewLabel(fmt.Sprintf("Bond4: %.f", saveData.EchoBond4)),
-//							widget.NewLabel(fmt.Sprintf("Bond5: %.f", saveData.EchoBond5)),
-//							widget.NewLabel(fmt.Sprintf("Bond6: %.f", saveData.EchoBond6)),
-//							widget.NewLabel(fmt.Sprintf("Bond7: %.f", saveData.EchoBond7)),
-//							widget.NewLabel(fmt.Sprintf("Bond8: %.f", saveData.EchoBond8)),
-//							widget.NewLabel(fmt.Sprintf("Bond9: %.f", saveData.EchoBond9)),
-//						),
-//					),
-//					widget.NewAccordionItem(
-//						fmt.Sprintf("Thea Bond: %.f", saveData.BondThea),
-//						container.NewVBox(
-//							widget.NewLabel(fmt.Sprintf("Bond0: %.f", saveData.TheaBond0)),
-//							widget.NewLabel(fmt.Sprintf("Bond1: %.f", saveData.TheaBond1)),
-//							widget.NewLabel(fmt.Sprintf("Bond2: %.f", saveData.TheaBond2)),
-//							widget.NewLabel(fmt.Sprintf("Bond3: %.f", saveData.TheaBond3)),
-//							widget.NewLabel(fmt.Sprintf("Bond4: %.f", saveData.TheaBond4)),
-//							widget.NewLabel(fmt.Sprintf("Bond5: %.f", saveData.TheaBond5)),
-//							widget.NewLabel(fmt.Sprintf("Bond6: %.f", saveData.TheaBond6)),
-//							widget.NewLabel(fmt.Sprintf("Bond7: %.f", saveData.TheaBond7)),
-//							widget.NewLabel(fmt.Sprintf("Bond8: %.f", saveData.TheaBond8)),
-//							widget.NewLabel(fmt.Sprintf("Bond9: %.f", saveData.TheaBond9)),
-//						),
-//					),
-//					widget.NewAccordionItem(
-//						fmt.Sprintf("Dolus Bond: %.f", saveData.BondDolus),
-//						container.NewVBox(
-//							widget.NewLabel(fmt.Sprintf("Bond0: %.f", saveData.DolusBond0)),
-//							widget.NewLabel(fmt.Sprintf("Bond1: %.f", saveData.DolusBond1)),
-//							widget.NewLabel(fmt.Sprintf("Bond2: %.f", saveData.DolusBond2)),
-//							widget.NewLabel(fmt.Sprintf("Bond3: %.f", saveData.DolusBond3)),
-//							widget.NewLabel(fmt.Sprintf("Bond4: %.f", saveData.DolusBond4)),
-//							widget.NewLabel(fmt.Sprintf("Bond5: %.f", saveData.DolusBond5)),
-//							widget.NewLabel(fmt.Sprintf("Bond6: %.f", saveData.DolusBond6)),
-//							widget.NewLabel(fmt.Sprintf("Bond7: %.f", saveData.DolusBond7)),
-//							widget.NewLabel(fmt.Sprintf("Bond8: %.f", saveData.DolusBond8)),
-//							widget.NewLabel(fmt.Sprintf("Bond9: %.f", saveData.DolusBond9)),
-//						),
-//					),
-//					widget.NewAccordionItem(
-//						fmt.Sprintf("Bside Bond: %.f", saveData.BondBside),
-//						container.NewVBox(
-//							widget.NewLabel(fmt.Sprintf("Bond0: %.f", saveData.BsideBond0)),
-//							widget.NewLabel(fmt.Sprintf("Bond1: %.f", saveData.BsideBond1)),
-//							widget.NewLabel(fmt.Sprintf("Bond2: %.f", saveData.BsideBond2)),
-//							widget.NewLabel(fmt.Sprintf("Bond3: %.f", saveData.BsideBond3)),
-//							widget.NewLabel(fmt.Sprintf("Bond4: %.f", saveData.BsideBond4)),
-//							widget.NewLabel(fmt.Sprintf("Bond5: %.f", saveData.BsideBond5)),
-//							widget.NewLabel(fmt.Sprintf("Bond6: %.f", saveData.BsideBond6)),
-//							widget.NewLabel(fmt.Sprintf("Bond7: %.f", saveData.BsideBond7)),
-//							widget.NewLabel(fmt.Sprintf("Bond8: %.f", saveData.BsideBond8)),
-//							widget.NewLabel(fmt.Sprintf("Bond9: %.f", saveData.BsideBond9)),
-//						),
-//					),
-//				),
+func makeItemSelect(data ...*model.SaveFloat) (selects []fyne.CanvasObject) {
+	for i := range data {
+		d := data[i]
+		s := widget.NewSelect(model.ItemNameList, func(item string) {
+			*d = model.ItemNameMap[item]
+		})
+		s.SetSelected(model.ItemIDMap[*data[i]])
+		selects = append(selects, s)
+	}
+	return selects
+}
+
+func makeBondsAccordion(saveData *model.SaveData) *widget.Accordion {
+
+	return widget.NewAccordion(
+		widget.NewAccordionItem(
+			fmt.Sprintf("Echo Bond: %.0f", saveData.BondEcho),
+			container.NewGridWithColumns(2,
+				widget.NewForm(
+					widget.NewFormItem("Bond0", EntrySF(&saveData.EchoBond0)),
+					widget.NewFormItem("Bond1", EntrySF(&saveData.EchoBond1)),
+					widget.NewFormItem("Bond2", EntrySF(&saveData.EchoBond2)),
+					widget.NewFormItem("Bond3", EntrySF(&saveData.EchoBond3)),
+					widget.NewFormItem("Bond4", EntrySF(&saveData.EchoBond4)),
+				),
+				widget.NewForm(
+					widget.NewFormItem("Bond5", EntrySF(&saveData.EchoBond5)),
+					widget.NewFormItem("Bond6", EntrySF(&saveData.EchoBond6)),
+					widget.NewFormItem("Bond7", EntrySF(&saveData.EchoBond7)),
+					widget.NewFormItem("Bond8", EntrySF(&saveData.EchoBond8)),
+					widget.NewFormItem("Bond9", EntrySF(&saveData.EchoBond9)),
+				),
+			),
+		),
+		widget.NewAccordionItem(
+			fmt.Sprintf("Thea Bond: %.f", saveData.BondThea),
+			container.NewGridWithColumns(2,
+				widget.NewForm(
+					widget.NewFormItem("Bond0", EntrySF(&saveData.TheaBond0)),
+					widget.NewFormItem("Bond1", EntrySF(&saveData.TheaBond1)),
+					widget.NewFormItem("Bond2", EntrySF(&saveData.TheaBond2)),
+					widget.NewFormItem("Bond3", EntrySF(&saveData.TheaBond3)),
+					widget.NewFormItem("Bond4", EntrySF(&saveData.TheaBond4)),
+				),
+				widget.NewForm(
+					widget.NewFormItem("Bond5", EntrySF(&saveData.TheaBond5)),
+					widget.NewFormItem("Bond6", EntrySF(&saveData.TheaBond6)),
+					widget.NewFormItem("Bond7", EntrySF(&saveData.TheaBond7)),
+					widget.NewFormItem("Bond8", EntrySF(&saveData.TheaBond8)),
+					widget.NewFormItem("Bond9", EntrySF(&saveData.TheaBond9)),
+				),
+			),
+		),
+		widget.NewAccordionItem(
+			fmt.Sprintf("Dolus Bond: %.f", saveData.BondDolus),
+			container.NewGridWithColumns(2,
+				widget.NewForm(
+					widget.NewFormItem("Bond0", EntrySF(&saveData.DolusBond0)),
+					widget.NewFormItem("Bond1", EntrySF(&saveData.DolusBond1)),
+					widget.NewFormItem("Bond2", EntrySF(&saveData.DolusBond2)),
+					widget.NewFormItem("Bond3", EntrySF(&saveData.DolusBond3)),
+					widget.NewFormItem("Bond4", EntrySF(&saveData.DolusBond4)),
+				),
+				widget.NewForm(
+
+					widget.NewFormItem("Bond5", EntrySF(&saveData.DolusBond5)),
+					widget.NewFormItem("Bond6", EntrySF(&saveData.DolusBond6)),
+					widget.NewFormItem("Bond7", EntrySF(&saveData.DolusBond7)),
+					widget.NewFormItem("Bond8", EntrySF(&saveData.DolusBond8)),
+					widget.NewFormItem("Bond9", EntrySF(&saveData.DolusBond9)),
+				),
+			),
+		),
+		widget.NewAccordionItem(
+			fmt.Sprintf("Bside Bond: %.f", saveData.BondBside),
+			container.NewGridWithColumns(2,
+				widget.NewForm(
+					widget.NewFormItem("Bond0", EntrySF(&saveData.BsideBond0)),
+					widget.NewFormItem("Bond1", EntrySF(&saveData.BsideBond1)),
+					widget.NewFormItem("Bond2", EntrySF(&saveData.BsideBond2)),
+					widget.NewFormItem("Bond3", EntrySF(&saveData.BsideBond3)),
+					widget.NewFormItem("Bond4", EntrySF(&saveData.BsideBond4)),
+				),
+				widget.NewForm(
+					widget.NewFormItem("Bond5", EntrySF(&saveData.BsideBond5)),
+					widget.NewFormItem("Bond6", EntrySF(&saveData.BsideBond6)),
+					widget.NewFormItem("Bond7", EntrySF(&saveData.BsideBond7)),
+					widget.NewFormItem("Bond8", EntrySF(&saveData.BsideBond8)),
+					widget.NewFormItem("Bond9", EntrySF(&saveData.BsideBond9)),
+				),
+			),
+		),
+	)
+}

@@ -65,6 +65,9 @@ func makeMenu() *fyne.MainMenu {
 func makeTabs() *container.AppTabs {
 	tabs := container.NewAppTabs(
 		container.NewTabItem("New Kid", view.MakePlayerContainer(saveData)),
+		container.NewTabItem("Thea", view.MakeTheaContainer(saveData)),
+		container.NewTabItem("Echo", view.MakeEchoContainer(saveData)),
+		container.NewTabItem("Dolus", view.MakeDolusContainer(saveData)),
 	)
 	tabs.SetTabLocation(container.TabLocationTop)
 	return tabs
@@ -73,10 +76,19 @@ func makeTabs() *container.AppTabs {
 func makeNoSaveContainer() *fyne.Container {
 	return container.NewPadded(
 		container.NewVBox(
+			widget.NewLabel("How to use:"),
+			widget.NewLabel("1. Backup save data"),
+			widget.NewLabel("2. Make sure game is closed"),
+			widget.NewLabel("3. Click 'Load Save' and find the save file"),
+			widget.NewLabel("4. Edit stuff"),
+			widget.NewLabel("5. Click file->save and overwrite the save file"),
+			widget.NewLabel("6. Remove savefile.ini"),
+			widget.NewLabel("7. Run the game and go HAM"),
 			container.NewHBox(
 				widget.NewButton("Load Save", openFileSelect),
 				layout.NewSpacer(),
 			),
+			widget.NewLabel("Note: I am not responsible if you lose any save data.\nAlway backup saves and use at your own risk!"),
 		),
 	)
 }
