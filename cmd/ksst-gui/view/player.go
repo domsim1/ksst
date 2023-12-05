@@ -38,7 +38,9 @@ func MakePlayerContainer(saveData *model.SaveData) *fyne.Container {
 		widget.NewFormItem("Luck", EntrySF(&saveData.PLck0)),
 	)
 
-	pocket := widget.NewForm()
+	pocket := widget.NewForm(
+		widget.NewFormItem("#1", EntrySF(&saveData.PItem00)),
+	)
 
 	return container.NewPadded(
 		container.NewVScroll(
