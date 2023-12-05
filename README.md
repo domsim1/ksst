@@ -59,3 +59,7 @@ Make sure you have everything required for [fyne](https://github.com/fyne-io/fyn
 
 Run `make run`.
 
+## Linux Install Instructions
+
+Download the latest release, uncompress and run sudo make install.
+
