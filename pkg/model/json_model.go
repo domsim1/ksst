@@ -17,6 +17,9 @@ func (sb StrangeSaveBool) MarshalJSON() ([]byte, error) {
 	if sb == -99 {
 		return []byte("true"), nil
 	}
+	if sb == -98 {
+		return []byte("false"), nil
+	}
 	return []byte(fmt.Sprintf("%.6f", float64(sb))), nil
 }
 
@@ -25,6 +28,8 @@ func (sb *StrangeSaveBool) UnmarshalJSON(data []byte) error {
 	switch v {
 	case "true":
 		*sb = StrangeSaveBool(-99)
+	case "false":
+		*sb = StrangeSaveBool(-98)
 	default:
 		f, err := strconv.ParseFloat(v, 64)
 		if err != nil {
@@ -193,7 +198,7 @@ type SaveData struct {
 	Encounter150         SaveFloat       `json:"encounter_15_0"`
 	Encounter218         SaveFloat       `json:"encounter_21_8"`
 	ItemFound47          SaveFloat       `json:"item_found47"`
-	AssistExp            SaveFloat       `json:"assist_exp"`
+	AssistExp            StrangeSaveBool `json:"assist_exp"`
 	Storage46            SaveFloat       `json:"storage46"`
 	PAdd35               SaveFloat       `json:"p_add3_5"`
 	Bincheck9            SaveFloat       `json:"bincheck9"`
@@ -574,7 +579,7 @@ type SaveData struct {
 	Bincheck45           SaveFloat       `json:"bincheck45"`
 	Encounter2513        SaveFloat       `json:"encounter_25_13"`
 	ItemFound147         SaveFloat       `json:"item_found147"`
-	AssistHeal           SaveFloat       `json:"assist_heal"`
+	AssistHeal           StrangeSaveBool `json:"assist_heal"`
 	MicroPlayed85        SaveFloat       `json:"micro_played85"`
 	MicroPlayed105       SaveFloat       `json:"micro_played105"`
 	MicroLevel110        SaveFloat       `json:"micro_level110"`
@@ -721,7 +726,7 @@ type SaveData struct {
 	MeetGym1             SaveFloat       `json:"meet_gym1"`
 	Encounter1111        SaveFloat       `json:"encounter_1_11"`
 	Encounter2314        SaveFloat       `json:"encounter_23_14"`
-	GrafixExp            SaveFloat       `json:"grafix_exp"`
+	GrafixExp            StrangeSaveBool `json:"grafix_exp"`
 	PIv12                SaveFloat       `json:"p_iv1_2"`
 	MicroPlayed36        SaveFloat       `json:"micro_played36"`
 	WinShmup             SaveFloat       `json:"win_shmup"`
@@ -1531,7 +1536,7 @@ type SaveData struct {
 	Encounter1314        SaveFloat       `json:"encounter_13_14"`
 	Encounter274         SaveFloat       `json:"encounter_27_4"`
 	ItemFound180         SaveFloat       `json:"item_found180"`
-	AssistVictory        SaveFloat       `json:"assist_victory"`
+	AssistVictory        StrangeSaveBool `json:"assist_victory"`
 	PAtk6                SaveFloat       `json:"p_atk6"`
 	PSpd8                SaveFloat       `json:"p_spd8"`
 	PMaxhp10             SaveFloat       `json:"p_maxhp10"`
@@ -1799,7 +1804,7 @@ type SaveData struct {
 	Storage45            SaveFloat       `json:"storage45"`
 	PAdd36               SaveFloat       `json:"p_add3_6"`
 	FuturesLock3         SaveFloat       `json:"futures_lock3"`
-	GrafixDim            SaveFloat       `json:"grafix_dim"`
+	GrafixDim            StrangeSaveBool `json:"grafix_dim"`
 	PItem39              SaveFloat       `json:"p_item3_9"`
 	MicroPlayed80        SaveFloat       `json:"micro_played80"`
 	MicroPlayed100       SaveFloat       `json:"micro_played100"`
