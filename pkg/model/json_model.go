@@ -101,7 +101,7 @@ type SaveData struct {
 	FuturesRed           SaveFloat `json:"futures_red"`
 	Encounter125         SaveFloat `json:"encounter_12_5"`
 	ItemFound124         SaveFloat `json:"item_found124"`
-	MiscAsync            SaveFloat `json:"misc_async"`
+	MiscAsync            SaveBool  `json:"misc_async"`
 	GotKnife             SaveFloat `json:"got_knife"`
 	PAdd40               SaveFloat `json:"p_add4_0"`
 	PEv115               SaveFloat `json:"p_ev11_5"`
