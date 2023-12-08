@@ -12,11 +12,12 @@ Note: Use this tool at your own risk. I'm not responsible if you lose any data. 
 
 1. Make a backup save
 2. Make sure the game is closed
-3. Load a save file
-4. Edit
-5. Overwrite old save file with new one
-6. Remove savefile.ini
-7. Enjoy!
+3. Disable steam cloud
+4. Load a save file
+5. Edit
+6. Overwrite old save file with new one
+7. Delete savefile.ini
+8. Enjoy!
 
 Save files can be located in:
 
