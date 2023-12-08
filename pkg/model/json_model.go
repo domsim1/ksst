@@ -176,7 +176,7 @@ type SaveData struct {
 	Encounter148         SaveFloat `json:"encounter_14_8"`
 	Encounter200         SaveFloat `json:"encounter_20_0"`
 	Encounter295         SaveFloat `json:"encounter_29_5"`
-	GrafixStats          SaveFloat `json:"grafix_stats"`
+	GrafixStats          SaveBool  `json:"grafix_stats"`
 	MicroPlayed83        SaveFloat `json:"micro_played83"`
 	MicroPlayed103       SaveFloat `json:"micro_played103"`
 	MicroLevel116        SaveFloat `json:"micro_level116"`
@@ -217,7 +217,7 @@ type SaveData struct {
 	Encounter2714        SaveFloat `json:"encounter_27_14"`
 	Encounter287         SaveFloat `json:"encounter_28_7"`
 	ItemFound105         SaveFloat `json:"item_found105"`
-	GrafixAnim           SaveFloat `json:"grafix_anim"`
+	GrafixAnim           SaveBool  `json:"grafix_anim"`
 	PIv22                SaveFloat `json:"p_iv2_2"`
 	ILeft6               SaveFloat `json:"i_left6"`
 	MicroPlayed147       SaveFloat `json:"micro_played147"`
@@ -672,7 +672,7 @@ type SaveData struct {
 	Encounter814         SaveFloat `json:"encounter_8_14"`
 	Encounter302         SaveFloat `json:"encounter_30_2"`
 	ItemFound72          SaveFloat `json:"item_found72"`
-	AssistFight          SaveFloat `json:"assist_fight"`
+	AssistFight          SaveBool  `json:"assist_fight"`
 	Storage73            SaveFloat `json:"storage73"`
 	PItem63              SaveFloat `json:"p_item6_3"`
 	CoolLights           SaveFloat `json:"cool_lights"`
@@ -1514,7 +1514,7 @@ type SaveData struct {
 	Bincheck29           SaveFloat `json:"bincheck29"`
 	Encounter262         SaveFloat `json:"encounter_26_2"`
 	ItemFound63          SaveFloat `json:"item_found63"`
-	MiscVsync            SaveFloat `json:"misc_vsync"`
+	MiscVsync            SaveBool  `json:"misc_vsync"`
 	PIv44                SaveFloat `json:"p_iv4_4"`
 	MicroLevel9          SaveFloat `json:"micro_level9"`
 	MicroPlayed42        SaveFloat `json:"micro_played42"`
@@ -2190,7 +2190,7 @@ type SaveData struct {
 	ItemFound18          SaveFloat `json:"item_found18"`
 	ItemFound150         SaveFloat `json:"item_found150"`
 	PlayerY              SaveFloat `json:"player_y"`
-	GrafixBg             SaveFloat `json:"grafix_bg"`
+	GrafixBg             SaveBool  `json:"grafix_bg"`
 	Storage19            SaveFloat `json:"storage19"`
 	PMaxmana0            SaveFloat `json:"p_maxmana0"`
 	PAdd16               SaveFloat `json:"p_add1_6"`
@@ -2289,7 +2289,7 @@ type SaveData struct {
 	Encounter73          SaveFloat `json:"encounter_7_3"`
 	Encounter3130        SaveFloat `json:"encounter_31_3"`
 	ItemFound196         SaveFloat `json:"item_found196"`
-	GrafixShake          SaveFloat `json:"grafix_shake"`
+	GrafixShake          SaveBool  `json:"grafix_shake"`
 	Storage34            SaveFloat `json:"storage34"`
 	PMana1               SaveFloat `json:"p_mana1"`
 	PTitle1              string    `json:"p_title1"`
