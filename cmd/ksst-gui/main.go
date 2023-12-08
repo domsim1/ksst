@@ -37,7 +37,7 @@ var (
 func main() {
 	a = app.New()
 	a.SetIcon(data.KidIcon)
-	w = a.NewWindow("ksst - v0.0.1")
+	w = a.NewWindow("ksst - v0.0.2")
 	mainMenu = makeMenu()
 	w.SetMainMenu(mainMenu)
 	w.SetMaster()
